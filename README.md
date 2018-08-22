@@ -1,108 +1,122 @@
 Commands
-Access monitor: mysql -u [username] -p; (will prompt for password)
+-----------
 
-Show all databases: show databases;
+Access monitor: `mysql -u [username] -p;` (will prompt for password)
 
-Access database: mysql -u [username] -p [database] (will prompt for password)
+Show all databases: `show databases;`
 
-Create new database: create database [database];
+Access database: `mysql -u [username] -p [database]` (will prompt for password)
 
-Select database: use [database];
+Create new database: `create database [database];`
 
-Determine what database is in use: select database();
+Select database: `use [database];`
 
-Show all tables: show tables;
+Determine what database is in use: `select database();`
 
-Show table structure: describe [table];
+Show all tables: `show tables;`
 
-List all indexes on a table: show index from [table];
+Show table structure: `describe [table];`
 
-Create new table with columns: CREATE TABLE [table] ([column] VARCHAR(120), [another-column] DATETIME);
+List all indexes on a table: `show index from [table];`
 
-Adding a column: ALTER TABLE [table] ADD COLUMN [column] VARCHAR(120);
+Create new table with columns: `CREATE TABLE [table] ([column] VARCHAR(120), [another-column] DATETIME);`
 
-Adding a column with an unique, auto-incrementing ID: ALTER TABLE [table] ADD COLUMN [column] int NOT NULL AUTO_INCREMENT PRIMARY KEY;
+Adding a column: `ALTER TABLE [table] ADD COLUMN [column] VARCHAR(120);`
 
-Inserting a record: INSERT INTO [table] ([column], [column]) VALUES ('[value]', [value]');
+Adding a column with an unique, auto-incrementing ID: `ALTER TABLE [table] ADD COLUMN [column] int NOT NULL AUTO_INCREMENT PRIMARY KEY;`
 
-MySQL function for datetime input: NOW()
+Inserting a record: `INSERT INTO [table] ([column], [column]) VALUES ('[value]', [value]');`
 
-Selecting records: SELECT * FROM [table];
+MySQL function for datetime input: `NOW()`
 
-Explain records: EXPLAIN SELECT * FROM [table];
+Selecting records: `SELECT * FROM [table];`
 
-Selecting parts of records: SELECT [column], [another-column] FROM [table];
+Explain records: `EXPLAIN SELECT * FROM [table];`
 
-Counting records: SELECT COUNT([column]) FROM [table];
+Selecting parts of records: `SELECT [column], [another-column] FROM [table];`
 
-Counting and selecting grouped records: SELECT *, (SELECT COUNT([column]) FROM [table]) AS count FROM [table] GROUP BY [column];
+Counting records: `SELECT COUNT([column]) FROM [table];`
 
-Selecting specific records: SELECT * FROM [table] WHERE [column] = [value]; (Selectors: <, >, !=; combine multiple selectors with AND, OR)
+Counting and selecting grouped records: `SELECT *, (SELECT COUNT([column]) FROM [table]) AS count FROM [table] GROUP BY [column];`
 
-Select records containing [value]: SELECT * FROM [table] WHERE [column] LIKE '%[value]%';
+Selecting specific records: `SELECT * FROM [table] WHERE [column] = [value];` (Selectors: `<`, `>`, `!=`; combine multiple selectors with `AND`, `OR`)
 
-Select records starting with [value]: SELECT * FROM [table] WHERE [column] LIKE '[value]%';
+Select records containing `[value]`: `SELECT * FROM [table] WHERE [column] LIKE '%[value]%';`
 
-Select records starting with val and ending with ue: SELECT * FROM [table] WHERE [column] LIKE '[val_ue]';
+Select records starting with `[value]`: `SELECT * FROM [table] WHERE [column] LIKE '[value]%';`
 
-Select a range: SELECT * FROM [table] WHERE [column] BETWEEN [value1] and [value2];
+Select records starting with `val` and ending with `ue`: `SELECT * FROM [table] WHERE [column] LIKE '[val_ue]';`
 
-Select with custom order and only limit: SELECT * FROM [table] WHERE [column] ORDER BY [column] ASC LIMIT [value]; (Order: DESC, ASC)
+Select a range: `SELECT * FROM [table] WHERE [column] BETWEEN [value1] and [value2];`
 
-Updating records: UPDATE [table] SET [column] = '[updated-value]' WHERE [column] = [value];
+Select with custom order and only limit: `SELECT * FROM [table] WHERE [column] ORDER BY [column] ASC LIMIT [value];` (Order: `DESC`, `ASC`)
 
-Deleting records: DELETE FROM [table] WHERE [column] = [value];
+Updating records: `UPDATE [table] SET [column] = '[updated-value]' WHERE [column] = [value];`
 
-Delete all records from a table (without dropping the table itself): DELETE FROM [table]; (This also resets the incrementing counter for auto generated columns like an id column.)
+Deleting records: `DELETE FROM [table] WHERE [column] = [value];`
 
-Delete all records in a table: truncate table [table];
+Delete *all records* from a table (without dropping the table itself): `DELETE FROM [table];`
+(This also resets the incrementing counter for auto generated columns like an id column.)
 
-Removing table columns: ALTER TABLE [table] DROP COLUMN [column];
+Delete all records in a table: `truncate table [table];`
 
-Deleting tables: DROP TABLE [table];
+Removing table columns: `ALTER TABLE [table] DROP COLUMN [column];`
 
-Deleting databases: DROP DATABASE [database];
+Deleting tables: `DROP TABLE [table];`
 
-Custom column output names: SELECT [column] AS [custom-column] FROM [table];
+Deleting databases: `DROP DATABASE [database];`
 
-Export a database dump (more info here): mysqldump -u [username] -p [database] > db_backup.sql
+Custom column output names: `SELECT [column] AS [custom-column] FROM [table];`
 
-Use --lock-tables=false option for locked tables (more info here).
+Export a database dump (more info [here](http://stackoverflow.com/a/21091197/1815847)): `mysqldump -u [username] -p [database] > db_backup.sql`
 
-Import a database dump (more info here): mysql -u [username] -p -h localhost [database] < db_backup.sql
+Use `--lock-tables=false` option for locked tables (more info [here](http://stackoverflow.com/a/104628/1815847)).
 
-Logout: exit;
+Import a database dump (more info [here](http://stackoverflow.com/a/21091197/1815847)): `mysql -u [username] -p -h localhost [database] < db_backup.sql`
+
+Logout: `exit;`
+
 
 Aggregate functions
-Select but without duplicates: SELECT distinct name, email, acception FROM owners WHERE acception = 1 AND date >= 2015-01-01 00:00:00
+-----------
 
-Calculate total number of records: SELECT SUM([column]) FROM [table];
+Select but without duplicates: `SELECT distinct name, email, acception FROM owners WHERE acception = 1 AND date >= 2015-01-01 00:00:00`
 
-Count total number of [column] and group by [category-column]: SELECT [category-column], SUM([column]) FROM [table] GROUP BY [category-column];
+Calculate total number of records: `SELECT SUM([column]) FROM [table];`
 
-Get largest value in [column]: SELECT MAX([column]) FROM [table];
+Count total number of `[column]` and group by `[category-column]`: `SELECT [category-column], SUM([column]) FROM [table] GROUP BY [category-column];`
 
-Get smallest value: SELECT MIN([column]) FROM [table];
+Get largest value in `[column]`: `SELECT MAX([column]) FROM [table];`
 
-Get average value: SELECT AVG([column]) FROM [table];
+Get smallest value: `SELECT MIN([column]) FROM [table];`
 
-Get rounded average value and group by [category-column]: SELECT [category-column], ROUND(AVG([column]), 2) FROM [table] GROUP BY [category-column];
+Get average value: `SELECT AVG([column]) FROM [table];`
+
+Get rounded average value and group by `[category-column]`: `SELECT [category-column], ROUND(AVG([column]), 2) FROM [table] GROUP BY [category-column];`
+
 
 Multiple tables
-Select from multiple tables: SELECT [table1].[column], [table1].[another-column], [table2].[column] FROM [table1], [table2];
+-----------
 
-Combine rows from different tables: SELECT * FROM [table1] INNER JOIN [table2] ON [table1].[column] = [table2].[column];
+Select from multiple tables: `SELECT [table1].[column], [table1].[another-column], [table2].[column] FROM [table1], [table2];`
 
-Combine rows from different tables but do not require the join condition: SELECT * FROM [table1] LEFT OUTER JOIN [table2] ON [table1].[column] = [table2].[column]; (The left table is the first table that appears in the statement.)
+Combine rows from different tables: `SELECT * FROM [table1] INNER JOIN [table2] ON [table1].[column] = [table2].[column];`
 
-Rename column or table using an alias: SELECT [table1].[column] AS '[value]', [table2].[column] AS '[value]' FROM [table1], [table2];
+Combine rows from different tables but do not require the join condition: `SELECT * FROM [table1] LEFT OUTER JOIN [table2] ON [table1].[column] = [table2].[column];` (The left table is the first table that appears in the statement.)
+
+Rename column or table using an _alias_: `SELECT [table1].[column] AS '[value]', [table2].[column] AS '[value]' FROM [table1], [table2];`
+
 
 Users functions
-List all users: SELECT User,Host FROM mysql.user;
+-----------
 
-Create new user: CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
+List all users: `SELECT User,Host FROM mysql.user;`
 
-Grant ALL access to user for * tables: GRANT ALL ON database.* TO 'user'@'localhost';
+Create new user: `CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';`
+
+Grant `ALL` access to user for `*` tables: `GRANT ALL ON database.* TO 'user'@'localhost';`
+
 
 Find out the IP Address of the Mysql Host
-SHOW VARIABLES WHERE Variable_name = 'hostname'; (source)
+-----------
+`SHOW VARIABLES WHERE Variable_name = 'hostname';` ([source](http://serverfault.com/a/129646))
